@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route as app;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,15 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+app::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/helo', function () {
+app::get('/helo', function () {
     echo"Hello world";
 }); 
 
-Route::get('/test/{name}/{id?}',function($name,$id=NULL){
+app::get('/test/{name}/{id?}',function($name,$id=NULL){
    $data = compact('name','id');
    return view('test')->with($data);
    
@@ -29,6 +30,39 @@ Route::get('/test/{name}/{id?}',function($name,$id=NULL){
     // return view('test')->with($data);
 });
 
-Route::get('/demo',function(){
+app::get('/demo',function(){
     return view('demo');
+});
+
+// *****************************************************************************************************
+
+// Controllers
+
+        //basic controler
+
+                use App\Http\Controllers\basic_demo as bdc;
+
+            app::get('/basicContollerDemo',[bdc::class,'greet']);
+
+            
+            /* demo of previous function */
+            // democontroller::func
+            // democontroller@func
+    
+        //single action controller
+        
+                use App\Http\Controllers\snglactnctrl;
+
+            app::get('/snglctrl', snglactnctrl::class);
+
+        //Resource Controller
+
+                use App\Http\Controllers\studentController;
+            app::resource('photo',studentController::class);
+
+// ***********************************************************************************************
+
+
+app::get('/form',function(){
+    return view('form');
 });
