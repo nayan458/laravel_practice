@@ -62,7 +62,9 @@ app::get('/demo',function(){
 
 // ***********************************************************************************************
 
+                use App\Http\Controllers\loginController;
+            app::get('/form',[loginController::class, 'loginn']);
+            app::post('/form',[loginController::class, 'register']);
+            app::get('/vform',[loginController::class, 'validform']);
 
-app::get('/form',function(){
-    return view('form');
-});
+// ******************
